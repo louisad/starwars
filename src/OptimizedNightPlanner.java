@@ -3,7 +3,8 @@ import java.util.LinkedList;
 
 /**
  * 
- * @author Sébastien
+ * @author SÃ©bastien
+ * @author Hello
  *
  */
 public class OptimizedNightPlanner {
@@ -54,6 +55,29 @@ public class OptimizedNightPlanner {
 				bons.add(i);
 				last= i;
 			}
+		}
+		
+		/*Calcul de la duree totale de la nuit 'bons' */
+		/* + Calcul du debut au plus tot du planning*/
+		int dureeTotaleBons = 0;
+		int debutAuPlusTotPlanning = 10^10;
+		int finAuPlusTardPlanning = 0;
+		Iterator<Integer> iter = bons.iterator();
+		while(iter.hasNext()){
+			int myInt = iter.next();
+			dureeTotaleBons += donnees[myInt].getDuree();
+			if (debutAuPlusTotPlanning > donnees[myInt].getDebut()){
+				debutAuPlusTotPlanning = donnees[myInt].getDebut();
+			}
+			if (finAuPlusTardPlanning < donnees[myInt].getFin()){
+				finAuPlusTardPlanning = donnees[myInt].getFin();
+			}
+		}
+		
+		
+		/*Verifie si la duree totale de la nuit ne depasse pas la plage maximale d observation */
+		if (dureeTotaleBons > finAuPlusTardPlanning - debutAuPlusTotPlanning){
+			bons.remove(0);
 		}
 		
 		/*Compter leur valeur*/
